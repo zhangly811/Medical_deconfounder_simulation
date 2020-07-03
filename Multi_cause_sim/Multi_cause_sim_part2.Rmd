@@ -13,7 +13,7 @@ randseed <- 12345
 set.seed(randseed)
 ```
 
-```{r}
+```{r eval=FALSE}
 # load data
 DATA_PATH <- file.path(getwd(), "data/")
 # load causes
@@ -37,7 +37,7 @@ n_causes <- dim(x_df)[2]+1
 n_sims = dim(ys)[2]
 ```
 
-```{r}
+```{r eval=FALSE} 
 # Run outcome models
 summary_stats <- array(NA, dim=c(n_sims, 4, 4))
 for (sim in seq(1, n_sims, 1)){
@@ -102,7 +102,7 @@ for (sim in seq(1, n_sims, 1)){
 }
 ```
 
-```{r}
+```{r eval=FALSE}
 # average over all simulations to output final table
 final_table <- as.data.frame(apply(summary_stats, c(2,3), FUN=mean))
 row.names(final_table) <-c('Oracle', 'Unadjusted', 'PMF', 'DEF')
