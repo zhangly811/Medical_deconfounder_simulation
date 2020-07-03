@@ -20,7 +20,14 @@
 
 
 ## Notes
-This implementation of the medical deconfounder adjusts for the mean of the posterior of reconstructed causes, rather than repeated samples from the posterior. Thus, the uncertainty of the causal effect estimates does not reflect the uncertainty in estimating the posterior of the reconstructed causes. To propagate the uncertainty of the posterior into estimating the causal effects, we recommend fitting the outcome model with repeated samples from the posterior of the reconstructed causes.
+In this implementation of the medical deconfounder, the uncertainty of
+the causal effect estimates may be underestimated. The reason is that
+the uncertainty estimates do not account for the uncertainty in
+estimating the reconstructed causes. For a more accurate estimate of
+the uncertainty, we recommend propagating the uncertainty in the
+reconstructed causes downstream. Operationally, it means we should
+draw samples from the full posterior of the reconstructed causes, and
+fit the outcome model for each sample.
 
 To fit a factor model, we need to fit it multiple times with different initialization and select the fit with the highest evidence lower bound (ELBO). The reason is that variational Bayes performs a non-convex optimization to fit factor models; it can get stuck in different local optima with different initializations. Operationally, it means to fit factor models multiple times with different random seeds and select the fit with the highest ELBO.
 
